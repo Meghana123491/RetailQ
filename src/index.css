@@ -6,37 +6,33 @@
 
 @layer base {
   :root {
-    /* Core Black & White Palette */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Luna Color Palette - Light Theme */
+    --background: 193 100% 97%;
+    --foreground: 204 95% 6%;
+    --card: 193 100% 97%;
+    --card-foreground: 204 95% 6%;
+    --card-hover: 193 100% 94%;
+    --popover: 193 100% 97%;
+    --popover-foreground: 204 95% 6%;
     
-    /* Card and Surface Colors */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --card-hover: 0 0% 98%;
+    /* Primary Brand Colors - Deep Luna Blue */
+    --primary: 204 95% 18%; /* #023859 */
+    --primary-foreground: 193 100% 95%;
+    --primary-hover: 204 95% 25%;
     
-    /* Popover Colors */
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    
-    /* Primary Brand Colors - Deep Black */
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 0 0% 10%;
-    
-    /* Secondary Colors - Light Gray */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
-    --secondary-hover: 0 0% 90%;
+    /* Secondary Colors - Medium Luna Blue */
+    --secondary: 193 54% 54%; /* #54ACBF */
+    --secondary-foreground: 193 100% 97%;
+    --secondary-hover: 193 54% 60%;
     
     /* Muted Colors for Subtle Elements */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 193 100% 90%;
+    --muted-foreground: 204 44% 35%;
     
-    /* Accent Colors - Subtle Blue Accent */
-    --accent: 210 100% 50%;
-    --accent-foreground: 0 0% 100%;
-    --accent-muted: 210 50% 96%;
+    /* Accent Colors - Light Luna Blue */
+    --accent: 193 100% 83%; /* #A7EBF2 */
+    --accent-foreground: 204 95% 18%;
+    --accent-muted: 193 100% 95%;
     
     /* Status Colors */
     --destructive: 0 84% 60%;
@@ -47,64 +43,62 @@
     --warning-foreground: 0 0% 0%;
     
     /* Border and Input Colors */
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --input-border: 0 0% 85%;
-    --ring: 0 0% 0%;
+    --border: 193 54% 75%;
+    --input: 193 100% 90%;
+    --input-border: 193 54% 70%;
+    --ring: 204 95% 18%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 20%));
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 96%), hsl(0 0% 100%));
-    --gradient-accent: linear-gradient(135deg, hsl(210 100% 50%), hsl(210 100% 60%));
+    --gradient-primary: linear-gradient(135deg, hsl(204 95% 18%), hsl(193 54% 54%));
+    --gradient-secondary: linear-gradient(135deg, hsl(193 100% 97%), hsl(193 100% 90%));
+    --gradient-accent: linear-gradient(135deg, hsl(193 100% 83%), hsl(193 54% 54%));
+    --gradient-luna: linear-gradient(135deg, hsl(193 100% 83%), hsl(193 54% 54%), hsl(204 44% 35%));
     
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
-    
+    --shadow-sm: 0 1px 2px 0 hsl(204 95% 18% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(204 95% 18% / 0.15), 0 2px 4px -1px hsl(204 95% 18% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(204 95% 18% / 0.15), 0 4px 6px -2px hsl(204 95% 18% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(204 95% 18% / 0.15), 0 10px 10px -5px hsl(204 95% 18% / 0.08);
   }
 
   .dark {
-    /* Dark Mode - Inverted Black & White */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    /* Luna Color Palette - Dark Theme */
+    --background: 204 95% 6%;
+    --foreground: 193 100% 95%;
+    --card: 204 95% 8%;
+    --card-foreground: 193 100% 95%;
+    --card-hover: 204 95% 12%;
+    --popover: 204 95% 8%;
+    --popover-foreground: 193 100% 95%;
     
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    --card-hover: 0 0% 8%;
+    --primary: 193 100% 83%; /* #A7EBF2 */
+    --primary-foreground: 204 95% 6%;
+    --primary-hover: 193 100% 75%;
     
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
+    --secondary: 204 44% 35%; /* #26658C */
+    --secondary-foreground: 193 100% 95%;
+    --secondary-hover: 204 44% 40%;
     
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --primary-hover: 0 0% 90%;
+    --muted: 204 95% 12%;
+    --muted-foreground: 193 54% 65%;
     
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --secondary-hover: 0 0% 15%;
+    --accent: 193 54% 54%; /* #54ACBF */
+    --accent-foreground: 204 95% 6%;
+    --accent-muted: 204 44% 25%;
     
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 60%;
+    --border: 204 44% 25%;
+    --input: 204 95% 10%;
+    --input-border: 204 44% 30%;
+    --ring: 193 100% 83%;
     
-    --accent: 210 100% 50%;
-    --accent-foreground: 0 0% 0%;
-    --accent-muted: 210 50% 10%;
-    
-    --border: 0 0% 15%;
-    --input: 0 0% 8%;
-    --input-border: 0 0% 20%;
-    --ring: 0 0% 100%;
-    
-    --sidebar-background: 0 0% 3%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 210 100% 50%;
+    --sidebar-background: 204 95% 4%;
+    --sidebar-foreground: 193 100% 95%;
+    --sidebar-primary: 193 100% 83%;
+    --sidebar-primary-foreground: 204 95% 6%;
+    --sidebar-accent: 204 95% 10%;
+    --sidebar-accent-foreground: 193 100% 95%;
+    --sidebar-border: 204 44% 20%;
+    --sidebar-ring: 193 100% 83%;
   }
 }
 

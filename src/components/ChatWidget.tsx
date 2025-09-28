@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Bot } from 'lucide-react';
+import { X, Send, Bot, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -12,11 +12,6 @@ interface Message {
   timestamp: Date;
 }
 
-interface ChatWidgetProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
 const initialMessages: Message[] = [
   {
     id: '1',
@@ -26,7 +21,8 @@ const initialMessages: Message[] = [
   },
 ];
 
-export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
+export const ChatWidget: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -80,77 +76,86 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     return 'Thank you for your message! I\'m here to help with product information, orders, pricing, shipping, and more. How can I assist you today?';
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed bottom-4 right-4 w-80 h-96 bg-card border border-border rounded-lg shadow-xl z-50 flex flex-col animate-scale-in">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border">
-        <div className="flex items-center gap-3">
-          <Avatar className="w-8 h-8">
-            <AvatarFallback className="bg-accent text-accent-foreground">
-              <Bot className="w-4 h-4" />
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <h3 className="font-semibold text-sm">RetailQ Assistant</h3>
-            <p className="text-xs text-muted-foreground">Online now</p>
+    <>
+      {/* Chat Toggle Button */}
+      <Button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-lg z-50 bg-primary hover:bg-primary-hover"
+        size="icon"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+      </Button>
+
+      {/* Chat Widget */}
+      {isOpen && (
+        <div className="fixed bottom-24 right-6 w-80 h-96 bg-card border border-border rounded-lg shadow-xl z-40 flex flex-col animate-scale-in">
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-luna rounded-t-lg">
+            <div className="flex items-center gap-3">
+              <Avatar className="w-8 h-8">
+                <AvatarFallback className="bg-primary text-primary-foreground">
+                  <Bot className="w-4 h-4" />
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h3 className="font-semibold text-sm text-primary-foreground">RetailQ Assistant</h3>
+                <p className="text-xs text-primary-foreground/80">Online now</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <ScrollArea className="flex-1 p-4">
+            <div className="space-y-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
+                      message.sender === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </div>
+              ))}
+              
+              {isTyping && (
+                <div className="flex justify-start">
+                  <div className="bg-muted text-muted-foreground rounded-lg px-3 py-2 text-sm">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-current rounded-full animate-pulse"></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Input */}
+          <div className="p-4 border-t border-border">
+            <div className="flex gap-2">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Type your message..."
+                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                className="flex-1"
+              />
+              <Button size="sm" onClick={sendMessage} disabled={!inputValue.trim()}>
+                <Send className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose}>
-          <X className="w-4 h-4" />
-        </Button>
-      </div>
-
-      {/* Messages */}
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
-                  message.sender === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
-                }`}
-              >
-                {message.content}
-              </div>
-            </div>
-          ))}
-          
-          {isTyping && (
-            <div className="flex justify-start">
-              <div className="bg-muted text-muted-foreground rounded-lg px-3 py-2 text-sm">
-                <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-current rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-current rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-current rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </ScrollArea>
-
-      {/* Input */}
-      <div className="p-4 border-t border-border">
-        <div className="flex gap-2">
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Type your message..."
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            className="flex-1"
-          />
-          <Button size="sm" onClick={sendMessage} disabled={!inputValue.trim()}>
-            <Send className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };

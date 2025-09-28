@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { AuthForms } from "@/components/AuthForms";
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
+import { ChatWidget } from "@/components/ChatWidget";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
@@ -27,7 +28,7 @@ const AppLayout: React.FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
+    <div className="flex min-h-screen w-full bg-background relative">
       <Sidebar 
         isCollapsed={sidebarCollapsed} 
         onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
@@ -46,6 +47,7 @@ const AppLayout: React.FC = () => {
           </Routes>
         </main>
       </div>
+      <ChatWidget />
     </div>
   );
 };

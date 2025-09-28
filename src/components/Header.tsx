@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Menu, Sun, Moon, Bell, MessageCircle } from 'lucide-react';
+import { Search, Menu, Sun, Moon, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import { useAuth } from '@/contexts/AuthContext';
-import { ChatWidget } from './ChatWidget';
 
 interface HeaderProps {
   onSidebarToggle: () => void;
@@ -24,12 +23,10 @@ export const Header: React.FC<HeaderProps> = ({ onSidebarToggle }) => {
   const { isDark, toggleDarkMode } = useDarkMode();
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
-  const [showChat, setShowChat] = useState(false);
 
   return (
-    <>
-      <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
+      <div className="flex items-center justify-between px-6 py-4">
           {/* Left Section */}
           <div className="flex items-center gap-4">
             <Button
@@ -66,17 +63,8 @@ export const Header: React.FC<HeaderProps> = ({ onSidebarToggle }) => {
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
 
-            {/* AI Chat Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowChat(true)}
-              className="hover:bg-secondary relative"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <Badge variant="secondary" className="absolute -top-1 -right-1 w-2 h-2 p-0 bg-accent"></Badge>
-            </Button>
-
+            {/* AI Chat Button - Removed, now using floating button */}
+            
             {/* Notifications */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -138,9 +126,5 @@ export const Header: React.FC<HeaderProps> = ({ onSidebarToggle }) => {
           </div>
         </div>
       </header>
-
-      {/* Chat Widget */}
-      <ChatWidget isOpen={showChat} onClose={() => setShowChat(false)} />
-    </>
-  );
-};
+    );
+  };
